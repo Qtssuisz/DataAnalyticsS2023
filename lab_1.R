@@ -43,4 +43,95 @@ plot(ecdf(DALY), do.points = FALSE, verticals = TRUE)
 par(pty = "s")
 qqnorm(DALY)
 qqline(DALY)
+
+ENVHEALTH
+ENVHEALTH <- as.numeric(ENVHEALTH)
+tf <- is.na(ENVHEALTH)
+ENVHEALTH <- ENVHEALTH[!tf]
+
+ECOSYSTEM
+ECOSYSTEM <- as.numeric(ECOSYSTEM)
+tf <- is.na(ECOSYSTEM)
+ECOSYSTEM <- ECOSYSTEM[!tf]
+
+AIR_H
+AIR_H <- as.numeric(AIR_H)
+tf <- is.na(AIR_H)
+AIR_H <- AIR_H[!tf]
+
+WATER_H
+WATER_H <- as.numeric(WATER_H)
+tf <- is.na(WATER_H)
+WATER_H <- WATER_H[!tf]
+
+AIR_E
+AIR_E <- as.numeric(AIR_E)
+tf <- is.na(AIR_E)
+AIR_E <- AIR_E[!tf]
+
+WATER_E
+WATER_E <- as.numeric(WATER_E)
+tf <- is.na(WATER_E)
+WATER_E <- WATER_E[!tf]
+
+BIODIVERSITY
+BIODIVERSITY <- as.numeric(BIODIVERSITY)
+tf <- is.na(BIODIVERSITY)
+BIODIVERSITY <- BIODIVERSITY[!tf]
+boxplot(EPI, EPI, ENVHEALTH, ECOSYSTEM, DALY, AIR_H, WATER_H, AIR_E, WATER_E, BIODIVERSITY)
+
+EPILand<-EPI[!Landlock]
+EPILand <- EPILand[!is.na(EPILand)]
+EPILand
+hist(EPILand)
+hist(EPILand, seq(30., 95., 1.0), prob=TRUE)
+lines(density(EPILand, na.rm = TRUE, bw =1.))
+rug(EPILand)
+plot(ecdf(EPILand), do.points = FALSE, verticals = TRUE)
+qqnorm(EPILand)
+qqline(EPILand)
+
+EPINSW <- EPI[!No_surface_water]
+EPINSW <- EPINSW[!is.na(EPINSW)]
+EPINSW
+hist(EPINSW)
+hist(EPINSW, seq(30., 95., 1.0), prob=TRUE)
+lines(density(EPINSW, na.rm = TRUE, bw =1.))
+rug(EPINSW)
+plot(ecdf(EPINSW), do.points = FALSE, verticals = TRUE)
+qqnorm(EPINSW)
+qqline(EPINSW)
+
+EPIDes <- EPI[!Desert]
+EPIDes <- EPIDes[!is.na(EPIDes)]
+EPIDes
+hist(EPIDes)
+hist(EPIDes, seq(30., 95., 1.0), prob=TRUE)
+lines(density(EPIDes, na.rm = TRUE, bw =1.))
+rug(EPIDes)
+plot(ecdf(EPIDes), do.points = FALSE, verticals = TRUE)
+qqnorm(EPIDes)
+qqline(EPIDes)
+
+EPIPD <- EPI[!High_Population_Density]
+EPIPD <- EPIPD[!is.na(EPIPD)]
+EPIPD
+hist(EPIPD)
+hist(EPIPD, seq(30., 95., 1.0), prob=TRUE)
+lines(density(EPIPD, na.rm = TRUE, bw =1.))
+rug(EPIPD)
+plot(ecdf(EPIPD), do.points = FALSE, verticals = TRUE)
+qqnorm(EPIPD)
+qqline(EPIPD)
+
+boxplot(EPILand, EPINSW, EPIDes, EPIPD)
+
+install.packages("stringr")
+library(stringr)
+
+EPI_regions
+GEO_subregion
+EPI_South_Asia <- Country[grepl("South Asia", EPI_regions)]
+EPI_South_Asia
+
 detach(EPI_data)
